@@ -1,0 +1,363 @@
+/* ===== 就活管理アプリ向け：淡い青・紫テーマ ===== */
+:root {
+    --color-bg: #f4f6fd;
+    --color-surface: #ffffff;
+    --color-text: #3d4a63;
+    --color-text-muted: #6b7a99;
+    --color-border: #e3e9f5;
+    --color-accent-blue: #8ec5ff;
+    --color-accent-purple: #c4b5fd;
+    --color-primary: #7c9cf5;
+    --color-primary-hover: #6b8ae8;
+    --color-danger: #f87171;
+    --color-danger-hover: #ef4444;
+    --color-secondary: #94a3b8;
+    --color-secondary-hover: #64748b;
+    --color-success: #34d399;
+    --color-warning: #fbbf24;
+    --shadow-sm: 0 2px 8px rgba(124, 140, 255, 0.12);
+    --shadow-md: 0 8px 28px rgba(124, 134, 255, 0.16);
+    --shadow-lg: 0 12px 36px rgba(167, 139, 250, 0.18);
+    --radius: 20px;
+    --radius-sm: 14px;
+    --radius-btn: 8px;
+    --radius-badge: 6px;
+}
+
+/* ===== ベース ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "IBM Plex Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+    background: linear-gradient(145deg, #eef4ff 0%, #f5f0ff 45%, #faf8ff 100%);
+}
+
+/* ===== レイアウト ===== */
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+}
+
+.page-header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.page-header h1 {
+    margin: 0 0 10px;
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: linear-gradient(135deg, #5b8def 0%, #9b7ef7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 登録画面：タイトルのコントラスト強化 */
+.page-header--form h1 {
+    color: #1e2a4a;
+    background: none;
+    -webkit-text-fill-color: #1e2a4a;
+    text-shadow: none;
+}
+
+.page-header p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+}
+
+.page-header .header-badge {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 6px 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #6d7fd4;
+    background: linear-gradient(135deg, rgba(142, 197, 255, 0.25), rgba(196, 181, 253, 0.25));
+    border-radius: var(--radius-badge);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+/* ===== カード ===== */
+.card {
+    background: var(--color-surface);
+    border: 1px solid rgba(196, 181, 253, 0.25);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 32px;
+}
+
+.card-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+/* ===== ボタン ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: #4a63c4;
+    color: #ffffff;
+    border: 2px solid #2d4f9e;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background: #3b54b0;
+    border-color: #243f7a;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: 2px solid #c53030;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+    border-color: #9b2c2c;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #556677 0%, #3d4f5f 100%);
+    color: #ffffff;
+    border: 2px solid #2c3a47;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #465a6a 0%, #2f3d4a 100%);
+    border-color: #1e2a33;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+/* ===== テーブル ===== */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.05rem;
+}
+
+thead {
+    background: linear-gradient(135deg, rgba(142, 197, 255, 0.15) 0%, rgba(196, 181, 253, 0.15) 100%);
+}
+
+th {
+    padding: 16px 18px;
+    text-align: left;
+    font-weight: 700;
+    color: #5a6a8a;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+    font-size: 1.05rem;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: rgba(142, 197, 255, 0.06);
+}
+
+td.company-name {
+    font-weight: 700;
+    font-size: 1.08rem;
+    color: #4a5568;
+}
+
+td.wage {
+    font-variant-numeric: tabular-nums;
+    color: #6d9a7a;
+    font-weight: 700;
+    font-size: 1.08rem;
+}
+
+/* ===== ステータスバッジ ===== */
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: var(--radius-badge);
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status-default {
+    background: linear-gradient(135deg, rgba(142, 197, 255, 0.35), rgba(196, 181, 253, 0.35));
+    color: #5b6fd4;
+}
+
+.status-success {
+    background: rgba(52, 211, 153, 0.2);
+    color: #059669;
+}
+
+.status-warning {
+    background: rgba(251, 191, 36, 0.25);
+    color: #b45309;
+}
+
+.status-danger {
+    background: rgba(248, 113, 113, 0.2);
+    color: #dc2626;
+}
+
+/* ===== 空状態 ===== */
+.empty-state {
+    text-align: center;
+    padding: 56px 24px !important;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+}
+
+.empty-state p {
+    margin: 0 0 20px;
+}
+
+/* ===== フォーム ===== */
+.form-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #2e3a52;
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1.05rem;
+    font-family: inherit;
+    color: var(--color-text);
+    background: #fafbff;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #a0aec0;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--color-accent-purple);
+    box-shadow: 0 0 0 4px rgba(196, 181, 253, 0.3);
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 12 12'%3E%3Cpath fill='%239b7ef7' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 640px) {
+    .container {
+        padding: 28px 16px 48px;
+    }
+
+    .card {
+        padding: 22px 18px;
+        border-radius: 16px;
+    }
+
+    .page-header h1 {
+        font-size: 1.65rem;
+    }
+
+    .page-header p {
+        font-size: 1rem;
+    }
+
+    th, td {
+        padding: 12px 14px;
+        font-size: 0.98rem;
+    }
+
+    td.company-name,
+    td.wage {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header page-header--form">
+            <span class="header-badge">新しい一歩を記録</span>
+            <h1>応募情報の登録</h1>
+            <p>気になる企業の情報を残しておきましょう</p>
+        </header>
+
+        <div class="card">
+            <form th:action="@{/}" th:object="${application}" method="post">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="companyName">企業名</label>
+                        <input type="text" id="companyName" th:field="*{companyName}" placeholder="例: 株式会社テスト" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="applicationDate">応募日</label>
+                        <input type="date" id="applicationDate" th:field="*{applicationDate}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">応募状況</label>
+                        <select id="status" th:field="*{status}" required>
+                            <option value="">選択してください</option>
+                            <option value="応募済み">応募済み</option>
+                            <option value="書類選考中">書類選考中</option>
+                            <option value="面接予定">面接予定</option>
+                            <option value="内定">内定</option>
+                            <option value="不採用">不採用</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skills">学べるスキル</label>
+                        <input type="text" id="skills" th:field="*{skills}" placeholder="例: Java, SQL, Spring Boot">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">勤務地</label>
+                        <input type="text" id="location" th:field="*{location}" placeholder="例: 東京都 / リモート" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hourlyWage">時給（円）</label>
+                        <input type="number" id="hourlyWage" th:field="*{hourlyWage}" placeholder="例: 1200" min="0">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">登録する</button>
+                    <a href="/" class="btn btn-secondary">一覧に戻る</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

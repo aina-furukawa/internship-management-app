@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インターン応募管理</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <span class="header-badge">就活・インターン管理</span>
+            <h1>応募一覧</h1>
+            <p>あなたの就活を、やさしく整理しましょう</p>
+        </header>
+
+        <div class="card">
+            <div class="card-toolbar">
+                <a href="/new" class="btn btn-primary">＋ 新規登録</a>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>企業名</th>
+                            <th>応募日</th>
+                            <th>応募状況</th>
+                            <th>学べるスキル</th>
+                            <th>勤務地</th>
+                            <th>時給</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${#lists.isEmpty(applications)}">
+                            <td colspan="7" class="empty-state">
+                                <p>まだ応募情報がありません</p>
+                                <a href="/new" class="btn btn-primary">最初の応募を登録する</a>
+                            </td>
+                        </tr>
+                        <tr th:each="app : ${applications}">
+                            <td class="company-name" th:text="${app.companyName}"></td>
+                            <td th:text="${app.applicationDate}"></td>
+                            <td>
+                                <span class="status-badge"
+                                      th:classappend="${app.status == '内定' ? ' status-success' : (app.status == '不採用' ? ' status-danger' : (app.status == '面接予定' ? ' status-warning' : ' status-default'))}"
+                                      th:text="${app.status}"></span>
+                            </td>
+                            <td th:text="${app.skills}"></td>
+                            <td th:text="${app.location}"></td>
+                            <td class="wage" th:text="${app.hourlyWage != null ? app.hourlyWage + '円' : '—'}"></td>
+                            <td>
+                                <form th:action="@{/delete/{id}(id=${app.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger">削除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
