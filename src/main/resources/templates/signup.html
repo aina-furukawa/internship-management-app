@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header page-header--form">
+            <span class="header-badge">アカウント作成</span>
+            <h1>新規登録</h1>
+            <p>あなた専用の応募管理スペースを作成します</p>
+        </header>
+
+        <div class="card auth-card">
+            <p class="alert alert-error" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+
+            <form th:action="@{/signup}" th:object="${signupForm}" method="post">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">お名前</label>
+                        <input type="text" id="name" th:field="*{name}" placeholder="例: 山田 花子" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" th:field="*{email}" placeholder="例: you@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">パスワード</label>
+                        <input type="password" id="password" th:field="*{password}" minlength="8" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordConfirm">パスワード（確認）</label>
+                        <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}" minlength="8" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">登録する</button>
+                    <a href="/login" class="btn btn-secondary">ログインへ戻る</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

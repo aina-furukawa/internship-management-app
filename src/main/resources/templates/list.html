@@ -18,8 +18,14 @@
         </header>
 
         <div class="card">
-            <div class="card-toolbar">
-                <a href="/new" class="btn btn-primary">＋ 新規登録</a>
+            <div class="card-toolbar card-toolbar--split">
+                <p class="user-greeting" th:text="${currentUserName} + ' さんの応募一覧'"></p>
+                <div class="toolbar-actions">
+                    <a href="/new" class="btn btn-primary">＋ 新規登録</a>
+                    <form th:action="@{/logout}" method="post" class="logout-form">
+                        <button type="submit" class="btn btn-secondary">ログアウト</button>
+                    </form>
+                </div>
             </div>
 
             <div class="table-wrapper">

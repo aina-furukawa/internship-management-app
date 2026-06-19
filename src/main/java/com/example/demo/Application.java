@@ -18,6 +18,9 @@ public class Application {
     private String location;
     private Integer hourlyWage;
 
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -38,4 +41,7 @@ public class Application {
 
     public Integer getHourlyWage() { return hourlyWage; }
     public void setHourlyWage(Integer hourlyWage) { this.hourlyWage = hourlyWage; }
+
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 }
