@@ -17,6 +17,10 @@ public class Application {
     private String skills;
     private String location;
     private Integer hourlyWage;
+    @Column(columnDefinition = "TEXT")
+    private String memo;
+
+
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
@@ -42,6 +46,9 @@ public class Application {
     public Integer getHourlyWage() { return hourlyWage; }
     public void setHourlyWage(Integer hourlyWage) { this.hourlyWage = hourlyWage; }
 
+    public String getMemo() { return memo; }
+    public void setMemo(String memo) { this.memo = memo; }
+    
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
 }

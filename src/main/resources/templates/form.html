@@ -13,12 +13,13 @@
     <div class="container">
         <header class="page-header page-header--form">
             <span class="header-badge">新しい一歩を記録</span>
-            <h1>応募情報の登録</h1>
+            <h1 th:text="${isEdit} ? '応募情報の編集' : '応募情報の登録'">応募情報の登録</h1>
             <p>気になる企業の情報を残しておきましょう</p>
         </header>
 
         <div class="card">
-            <form th:action="@{/}" th:object="${application}" method="post">
+            <form th:action="${isEdit} ? @{/edit/{id}(id=${application.id})} : @{/}"
+                th:object="${application}" method="post">
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="companyName">企業名</label>
@@ -56,10 +57,15 @@
                         <label for="hourlyWage">時給（円）</label>
                         <input type="number" id="hourlyWage" th:field="*{hourlyWage}" placeholder="例: 1200" min="0">
                     </div>
+                    <div class="form-group">
+                        <label for="memo">メモ</label>
+                        <textarea id="memo" th:field="*{memo}" rows="4"
+                                  placeholder="例: 面接日時、担当者名、気になった点"></textarea>
+                    </div>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">登録する</button>
+                    <button type="submit" class="btn btn-primary" th:text="${isEdit} ? '更新する' : '登録する'">登録する</button>
                     <a href="/" class="btn btn-secondary">一覧に戻る</a>
                 </div>
             </form>

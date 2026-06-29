@@ -38,12 +38,13 @@
                             <th>学べるスキル</th>
                             <th>勤務地</th>
                             <th>時給</th>
+                            <th>メモ</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:if="${#lists.isEmpty(applications)}">
-                            <td colspan="7" class="empty-state">
+                            <td colspan="8" class="empty-state">
                                 <p>まだ応募情報がありません</p>
                                 <a href="/new" class="btn btn-primary">最初の応募を登録する</a>
                             </td>
@@ -59,7 +60,9 @@
                             <td th:text="${app.skills}"></td>
                             <td th:text="${app.location}"></td>
                             <td class="wage" th:text="${app.hourlyWage != null ? app.hourlyWage + '円' : '—'}"></td>
+                            <td th:text="${app.memo != null && !#strings.isEmpty(app.memo) ? app.memo : '—'}"></td>
                             <td>
+                                <a th:href="@{/edit/{id}(id=${app.id})}" class="btn btn-secondary">編集</a>
                                 <form th:action="@{/delete/{id}(id=${app.id})}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-danger">削除</button>
                                 </form>
