@@ -45,12 +45,12 @@
                     </thead>
                     <tbody>
                         <tr th:if="${#lists.isEmpty(applications)}">
-                            <td colspan="９" class="empty-state">
+                            <td colspan="9" class="empty-state">
                                 <p>まだ応募情報がありません</p>
                                 <a href="/new" class="btn btn-primary">最初の応募を登録する</a>
                             </td>
                         </tr>
-                        <tr th:each="app : ${applications}">
+                        <tr th:each="app, stat : ${applications}">
                             <td class="order-actions">
                                 <form th:if="${!stat.first}" th:action="@{/move-up/{id}(id=${app.id})}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-secondary btn-sm">↑</button>
