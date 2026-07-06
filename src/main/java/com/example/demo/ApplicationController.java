@@ -20,7 +20,7 @@ public class ApplicationController {
     @GetMapping("/")
     public String list(Model model) {
         User user = currentUserService.getCurrentUser();
-        model.addAttribute("applications", repository.findByUserIdOrderByApplicationDateDesc(user.getId()));
+    model.addAttribute("applications", repository.findByUserIdOrderBySortOrderAscIdAsc(user.getId()));
         model.addAttribute("currentUserName", user.getName());
         return "list";
     }
@@ -44,6 +44,9 @@ public class ApplicationController {
     public String create(@ModelAttribute Application application) {
         User user = currentUserService.getCurrentUser();
         application.setUserId(user.getId());
+      List<Application> existing = repository.findByUserIdOrderBySortOrderAscIdAsc(user.getId());
+    int nextOrder = existing.isEmpty() ? 0 : existing.get(existing.size() - 1).getSortOrder() + 1;
+    application.setSortOrder(nextOrder);  
         repository.save(application);
         return "redirect:/";
     }
@@ -69,4 +72,38 @@ public class ApplicationController {
         repository.save(existing);
         return "redirect:/";
     }
+    @PostMapping("/move-up/{id}")
+public String moveUp(@PathVariable Long id) {
+    User user = currentUserService.getCurrentUser();
+    swapOrder(user.getId(), id, -1);
+    return "redirect:/";
+}
+
+@PostMapping("/move-down/{id}")
+public String moveDown(@PathVariable Long id) {
+    User user = currentUserService.getCurrentUser();
+    swapOrder(user.getId(), id, 1);
+    return "redirect:/";
+}
+
+private void swapOrder(Long userId, Long id, int direction) {
+    List<Application> list = repository.findByUserIdOrderBySortOrderAscIdAsc(userId);
+    for (int i = 0; i < list.size(); i++) {
+        if (!list.get(i).getId().equals(id)) {
+            continue;
+        }
+        int targetIndex = i + direction;
+        if (targetIndex < 0 || targetIndex >= list.size()) {
+            return;
+        }
+        Application current = list.get(i);
+        Application target = list.get(targetIndex);
+        int temp = current.getSortOrder();
+        current.setSortOrder(target.getSortOrder());
+        target.setSortOrder(temp);
+        repository.save(current);
+        repository.save(target);
+        return;
+    }
+}
 }

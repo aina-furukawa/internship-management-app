@@ -32,6 +32,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>順番</th>
                             <th>企業名</th>
                             <th>応募日</th>
                             <th>応募状況</th>
@@ -44,12 +45,20 @@
                     </thead>
                     <tbody>
                         <tr th:if="${#lists.isEmpty(applications)}">
-                            <td colspan="8" class="empty-state">
+                            <td colspan="９" class="empty-state">
                                 <p>まだ応募情報がありません</p>
                                 <a href="/new" class="btn btn-primary">最初の応募を登録する</a>
                             </td>
                         </tr>
                         <tr th:each="app : ${applications}">
+                            <td class="order-actions">
+                                <form th:if="${!stat.first}" th:action="@{/move-up/{id}(id=${app.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-secondary btn-sm">↑</button>
+                                </form>
+                                <form th:if="${!stat.last}" th:action="@{/move-down/{id}(id=${app.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-secondary btn-sm">↓</button>
+                                </form>
+                            </td>
                             <td class="company-name" th:text="${app.companyName}"></td>
                             <td th:text="${app.applicationDate}"></td>
                             <td>

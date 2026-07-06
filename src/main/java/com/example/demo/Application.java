@@ -20,7 +20,11 @@ public class Application {
     @Column(columnDefinition = "TEXT")
     private String memo;
 
+    @Column(name = "sort_order", nullable = false)
+    private Integer sortOrder = 0;
 
+    public Integer getSortOrder() { return sortOrder; }
+    public void setSortOrder(Integer sortOrder) { this.sortOrder = sortOrder; } 
 
     @Column(name = "user_id", nullable = false)
     private Long userId;
